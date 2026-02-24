@@ -5,16 +5,13 @@
 Discache provides a simple key-value storage interface that automatically distributes data across multiple nodes in an Elixir cluster using consistent hashing. 
 Built on the BEAM's distribution capabilities, it offers fault-tolerant caching with minimal configuration.
 
+
 Features
-Transparent Distribution: Keys are automatically distributed across cluster nodes using consistent hashing
-
-Zero Configuration: Works out-of-the-box with your existing Elixir cluster
-
-Fault Tolerant: Continues operating during node failures (with configurable replication)
-
-Simple API: Familiar get/put semantics with pattern matching friendly return values
-
-Lightweight: Minimal dependencies, just Elixir/OTP and ([:ex_hash_ring](https://github.com/discord/ex_hash_ring))
+- Transparent Distribution: Keys are automatically distributed across cluster nodes using consistent hashing
+- Zero Configuration: Works out-of-the-box with your existing Elixir cluster
+- Fault Tolerant: Continues operating during node failures (with configurable replication)
+- Simple API: Familiar get/put semantics with pattern matching friendly return values
+- Lightweight: Minimal dependencies, just Elixir/OTP and ([:ex_hash_ring](https://github.com/discord/ex_hash_ring))
 
 
 
@@ -117,16 +114,9 @@ You may use the Gossip Strategy or any cluster strategy that fits your use case
   end
 ```
 
-
-Contributing
-We welcome contributions! See CONTRIBUTING.md for guidelines.
-
-
 Acknowledgments
 Built on the shoulders of the BEAM community
-
 Hash ring implementation by :ex_hash_ring
 
-Need help? Open an issue on GitHub or reach out to the maintainers.
 
 
