@@ -34,13 +34,14 @@ Then run mix deps.get to fetch the dependency.
 
 ## Usage
 
-Basic Operations
-### Store a value
+### Basic Operations
+
+#### ``` Store a value ```
 ```elixir
 :ok = Discache.put("user:123", %{name: "Jane", email: "jane@example.com"})
 ```
 
-### Retrieve a value
+#### ``` Retrieve a value ```
 ```elixir
 case Discache.get(:user_cache, "user:123") do
   {:ok, user} -> IO.inspect(user)
@@ -48,12 +49,12 @@ case Discache.get(:user_cache, "user:123") do
 end
 ```
 
-### Delete a value
+#### ``` Delete a value ```
 ```elixir
 :ok = Discache.delete(:user_cache, "user:123")
 ```
 
-### Check if a key exists
+#### ``` Check if a key exists ```
 ```elixir
 true = Discache.has_key?(:user_cache, "user:123")
 ```
@@ -65,15 +66,15 @@ Connect the nodes manually or use a library like libcluster for automatic discov
 Start your nodes with a shared cookie:
 
 
-### Manual connection
-bash
+### Manual connection (For test purposes.)
+Run mmultiple instances of your project in separate bash terminals.
 
-Terminal 1
+#### Terminal 1
 ```
 iex --sname cache1@localhost --cookie secret -S mix
 ```
 
-Terminal 2 
+#### Terminal 2 
 ``` 
 iex --sname cache2@localhost --cookie secret -S mix
 ```
