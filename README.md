@@ -68,14 +68,19 @@ Start your nodes with a shared cookie:
 Manual connection
 bash
 ### Terminal 1
+```
 iex --sname cache1@localhost --cookie secret -S mix
+```
 
-### Terminal 2  
+### Terminal 2 
+``` 
 iex --sname cache2@localhost --cookie secret -S mix
+```
 
 ### Manual connection (in Terminal 2)
+```
 Node.connect(:"cache1@localhost")
-
+```
 
 Using Libcluster
 Add libcluster to your list of dependencies in mix.exs:
