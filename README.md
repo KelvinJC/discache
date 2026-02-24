@@ -65,24 +65,31 @@ Connect the nodes manually or use a library like libcluster for automatic discov
 Start your nodes with a shared cookie:
 
 
-Manual connection
+### Manual connection
 bash
-### Terminal 1
+
+Terminal 1
 ```
 iex --sname cache1@localhost --cookie secret -S mix
 ```
 
-### Terminal 2 
+Terminal 2 
 ``` 
 iex --sname cache2@localhost --cookie secret -S mix
 ```
 
-### Manual connection (in Terminal 2)
+Manual connection (in Terminal 2)
 ```
 Node.connect(:"cache1@localhost")
 ```
 
-Using Libcluster
+## Automatic node clustering using Libcluster
+Libcluster is a library that provides a mechanism for automatically forming clusters of Erlang nodes, with either static or dynamic node membership. 
+It provides a pluggable "strategy" system, with a variety of strategies provided out of the box.
+
+For more information, checkout the library [here](https://github.com/bitwalker/libcluster) 
+
+
 Add libcluster to your list of dependencies in mix.exs:
 
 ```elixir
