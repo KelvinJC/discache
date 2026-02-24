@@ -60,28 +60,28 @@ true = Discache.has_key?(:user_cache, "user:123")
 ```
 
 ## Cluster Setup
-Connecting Nodes
+Connecting Nodes:
+
 Discache leverages Erlang's distributed capabilities. 
-Connect the nodes manually or use a library like libcluster for automatic discovery.
-Start your nodes with a shared cookie:
+You may connect your applications' nodes manually(e.g. for testing during development) or use a library like libcluster for automatic discovery.
 
 
 ### Manual connection (For test purposes.)
-Run mmultiple instances of your project in separate bash terminals.
+Run multiple instances of your project in separate bash terminals. 
 
 #### Terminal 1
 ```
-iex --sname cache1@localhost --cookie secret -S mix
+iex --name "cache1app@127.0.0.1" --cookie secret -S mix
 ```
 
 #### Terminal 2 
 ``` 
-iex --sname cache2@localhost --cookie secret -S mix
+iex --name "cache2app@127.0.0.1" --cookie secret -S mix
 ```
 
 Manual connection (in Terminal 2)
 ```
-Node.connect(:"cache1@localhost")
+Node.connect(:"cache1app@127.0.0.1")
 ```
 
 ## Automatic node clustering using Libcluster
@@ -128,9 +128,8 @@ You may use the Gossip Strategy or any cluster strategy that fits your use case
   end
 ```
 
-Acknowledgments
-Built on the shoulders of the BEAM community
-Hash ring implementation by :ex_hash_ring
+## Acknowledgments:
 
+Built on the shoulders of the BEAM community.
 
 
