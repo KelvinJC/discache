@@ -38,12 +38,12 @@ Then run mix deps.get to fetch the dependency.
 
 #### ``` Store a value ```
 ```elixir
-:ok = Discache.put("user:123", %{name: "Jane", email: "jane@example.com"})
+:ok = Discache.put("user1", %{name: "Jane", email: "jane@example.com"})
 ```
 
 #### ``` Retrieve a value ```
 ```elixir
-case Discache.get(:user_cache, "user:123") do
+case Discache.get("user1") do
   {:ok, user} -> IO.inspect(user)
   {:error, :not_found} -> IO.puts("User not found in cache")
 end
@@ -51,12 +51,12 @@ end
 
 #### ``` Delete a value ```
 ```elixir
-:ok = Discache.delete(:user_cache, "user:123")
+:ok = Discache.delete("user1")
 ```
 
 #### ``` Check if a key exists ```
 ```elixir
-true = Discache.has_key?(:user_cache, "user:123")
+true = Discache.has_key?("user1")
 ```
 
 ## Cluster Setup
