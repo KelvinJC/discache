@@ -43,6 +43,18 @@ defmodule Discache do
     end
   end
 
+  @spec has_key?(any()) :: boolean()
+  def has_key?(key) do
+    with {:ok, node} <- Ring.find_node(DistributionRing, key),
+      response <- GenServer.call({__MODULE__, node}, {:get, key}) do
+        if response do
+          true
+        else
+          false
+        end
+    end
+  end
+
   @doc """
   Creates a new Discache cache process.
   """
