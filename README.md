@@ -1,5 +1,6 @@
-Discache
-A lightweight, distributed in-memory cache for Elixir applications.
+# Discache
+
+**A lightweight, distributed in-memory cache for Elixir applications.**
 
 Discache provides a simple key-value storage interface that automatically distributes data across multiple nodes in an Elixir cluster using consistent hashing. 
 Built on the BEAM's distribution capabilities, it offers fault-tolerant caching with minimal configuration.
@@ -17,7 +18,8 @@ Lightweight: Minimal dependencies, just Elixir/OTP and ([:ex_hash_ring](https://
 
 
 
-Installation
+## Installation
+
 Note: Discache is not yet published to Hex.pm. 
 For now, you can depend on the GitHub version:
 Add discache to your list of dependencies in mix.exs:
@@ -32,7 +34,7 @@ end
 Then run mix deps.get to fetch the dependency.
 
 
-Usage
+## Usage
 
 Basic Operations
 # Store a value
@@ -58,7 +60,7 @@ end
 true = Discache.has_key?(:user_cache, "user:123")
 ```
 
-Cluster Setup
+## Cluster Setup
 Connecting Nodes
 Discache leverages Erlang's distributed capabilities. 
 Connect the nodes manually or use a library like libcluster for automatic discovery.
