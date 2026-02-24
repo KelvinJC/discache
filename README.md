@@ -1,10 +1,26 @@
-# Discache
+Discache
+A lightweight, distributed in-memory cache for Elixir applications.
 
-**Distribute your cache across multiple servers. Built with Elixir.**
+Discache provides a simple key-value storage interface that automatically distributes data across multiple nodes in an Elixir cluster using consistent hashing. 
+Built on the BEAM's distribution capabilities, it offers fault-tolerant caching with minimal configuration.
 
-## Installation
+Features
+Transparent Distribution: Keys are automatically distributed across cluster nodes using consistent hashing
 
-Get it from Github
+Zero Configuration: Works out-of-the-box with your existing Elixir cluster
+
+Fault Tolerant: Continues operating during node failures (with configurable replication)
+
+Simple API: Familiar get/put semantics with pattern matching friendly return values
+
+Lightweight: Minimal dependencies, just Elixir/OTP and ([:ex_hash_ring](https://github.com/discord/ex_hash_ring))
+
+
+
+Installation
+Note: Discache is not yet published to Hex.pm. 
+For now, you can depend on the GitHub version:
+Add discache to your list of dependencies in mix.exs:
 
 ```elixir
 def deps do
@@ -13,5 +29,102 @@ def deps do
   ]
 end
 ```
-Then run mix deps.get
+Then run mix deps.get to fetch the dependency.
+
+
+Usage
+
+Basic Operations
+# Store a value
+```elixir
+:ok = Discache.put("user:123", %{name: "Jane", email: "jane@example.com"})
+```
+
+# Retrieve a value
+```elixir
+case Discache.get(:user_cache, "user:123") do
+  {:ok, user} -> IO.inspect(user)
+  {:error, :not_found} -> IO.puts("User not found in cache")
+end
+```
+
+# Delete a value
+```elixir
+:ok = Discache.delete(:user_cache, "user:123")
+```
+
+# Check if a key exists
+```elixir
+true = Discache.has_key?(:user_cache, "user:123")
+```
+
+Cluster Setup
+Connecting Nodes
+Discache leverages Erlang's distributed capabilities. 
+Connect the nodes manually or use a library like libcluster for automatic discovery.
+Start your nodes with a shared cookie:
+
+
+Manual connection
+bash
+# Terminal 1
+iex --sname cache1@localhost --cookie secret -S mix
+
+# Terminal 2  
+iex --sname cache2@localhost --cookie secret -S mix
+
+# Manual connection (in Terminal 2)
+Node.connect(:"cache1@localhost")
+
+
+Using Libcluster
+Add libcluster to your list of dependencies in mix.exs:
+
+```elixir
+def deps do
+  [
+    {:libcluster, "~> 3.5"}
+
+  ]
+end
+```
+Then run mix deps.get to fetch the dependency.
+
+
+You may use the Gossip Strategy or any cluster strategy that fits your use case
+```elixir
+  def start(_type, _args) do
+    topologies = [
+      demo_cluster: [
+        strategy: Cluster.Strategy.Gossip,
+        config: [
+          port: 45892,
+          if_address: "0.0.0.0",
+          multicast_addr: "255.255.255.255",
+          broadcast_only: true
+        ]
+      ]
+    ]
+
+    children = [
+      {Cluster.Supervisor, [topologies, [name: YourAppName.Cluster]]},
+      # ... other processes ...
+    ]
+
+    # ....
+  end
+```
+
+
+Contributing
+We welcome contributions! See CONTRIBUTING.md for guidelines.
+
+
+Acknowledgments
+Built on the shoulders of the BEAM community
+
+Hash ring implementation by :ex_hash_ring
+
+Need help? Open an issue on GitHub or reach out to the maintainers.
+
 
