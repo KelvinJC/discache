@@ -17,8 +17,9 @@ Features
 
 ## Installation
 
-Note: Discache is not yet published to Hex.pm. 
-For now, you can depend on the GitHub version:
+Note: 
+Discache is not yet published to Hex.pm. For now, you can depend on the GitHub version.
+
 Add discache to your list of dependencies in mix.exs:
 
 ```elixir
