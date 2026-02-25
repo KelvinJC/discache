@@ -150,13 +150,13 @@ iex --name "cache2app@127.0.0.1" --cookie secret -S mix
 ```
 
 If your run Node.list() on any iex terminal it should return the name of the other node 
- - on the first terminal
+ > on the first terminal
 ``` 
 iex(cache1app@127.0.0.1)1> Node.list()
 [:"cache2app@127.0.0.1"] 
 ```
 
- - on the second terminal
+ > on the second terminal
 ``` 
 iex(cache2app@127.0.0.1)1> Node.list()
 [:"cache1app@127.0.0.1"] 
