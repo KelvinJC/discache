@@ -60,14 +60,10 @@ true = Discache.has_key?("user1")
 ```
 
 ## Cluster Setup
-Connecting Nodes:
+Discache leverages the distributed capabilities of the Erlang Virtual Machine. 
+You may connect your nodes manually or preferably, use a library like libcluster for automatic discovery.
 
-Discache leverages Erlang's distributed capabilities. 
-You may connect your applications' nodes manually(e.g. for testing during development) or use a library like libcluster for automatic discovery.
-
-
-### Manual connection (For test purposes.)
-Run multiple instances of your project in separate bash terminals. 
+Start separate nodes by running your project in separate bash terminals. 
 
 #### _first terminal_
 ```
@@ -79,13 +75,15 @@ iex --name "cache1app@127.0.0.1" --cookie secret -S mix
 iex --name "cache2app@127.0.0.1" --cookie secret -S mix
 ```
 
-Manual connection (in Terminal 2)
+### Manual node connection 
+Manual connection. 
+Run the following command on your second iex terminal
 ```
 Node.connect(:"cache1app@127.0.0.1")
 ```
 
 ### Automatic node clustering using Libcluster
-Libcluster is a library that provides a mechanism for automatically forming clusters of Erlang nodes, with either static or dynamic node membership. 
+Libcluster is a library that provides a mechanism for automatically forming clusters of Erlang Virtual Machine nodes, with either static or dynamic node membership. 
 It provides a pluggable "strategy" system, with a variety of strategies provided out of the box.
 
 For more information, checkout the library [here](https://github.com/bitwalker/libcluster) 
@@ -104,7 +102,8 @@ end
 Then run mix deps.get to fetch the dependency.
 
 
-You may use the Gossip Strategy or any cluster strategy that fits your use case
+You may use the Gossip Strategy or any Cluster strategy that fits your use case.
+Update the start/2 function in your application.ex file
 ```elixir
   def start(_type, _args) do
     topologies = [
