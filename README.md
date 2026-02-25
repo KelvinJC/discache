@@ -89,7 +89,7 @@ It provides a pluggable "strategy" system, with a variety of strategies provided
 For more information, checkout the library [here](https://github.com/bitwalker/libcluster) 
 
 
-Add libcluster to your list of dependencies in mix.exs:
+- Add libcluster to your list of dependencies in mix.exs:
 
 ```elixir
 def deps do
@@ -99,14 +99,20 @@ def deps do
   ]
 end
 ```
-Then run mix deps.get to fetch the dependency.
+
+- Run mix deps.get to fetch the dependency.
 
 
-You may use the Gossip Strategy or any Cluster strategy that fits your use case.
+- Define your cluster strategy.
+Configure a cluster topology and add it to your application's supervision tree.
+In this example we make use of the Gossip Strategy but you may use any cluster strategy that fits your use case.
 
-Update the start/2 function in your application.ex file
 ```elixir
+defmodule YourApp.Application do
+  use Application
+
   def start(_type, _args) do
+    # Add topology
     topologies = [
       demo_cluster: [
         strategy: Cluster.Strategy.Gossip,
@@ -120,15 +126,18 @@ Update the start/2 function in your application.ex file
     ]
 
     children = [
-      {Cluster.Supervisor, [topologies, [name: YourAppName.Cluster]]},
+      # Add this line 
+      {Cluster.Supervisor, [topologies, [name: YourApp.Cluster]]},
       # ... other processes ...
     ]
 
-    # ....
+    opts = [strategy: :one_for_one, name: YourApp.Supervisor]
+    Supervisor.start_link(children, opts)
   end
+end
 ```
 
-Again, start separate nodes by running your project in separate bash terminals. 
+- Again, start separate nodes by running your project in separate bash terminals. 
 
 #### _first terminal_
 ```
