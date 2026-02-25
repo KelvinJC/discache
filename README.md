@@ -103,6 +103,7 @@ Then run mix deps.get to fetch the dependency.
 
 
 You may use the Gossip Strategy or any Cluster strategy that fits your use case.
+
 Update the start/2 function in your application.ex file
 ```elixir
   def start(_type, _args) do
@@ -126,6 +127,32 @@ Update the start/2 function in your application.ex file
     # ....
   end
 ```
+
+Again, start separate nodes by running your project in separate bash terminals. 
+
+#### _first terminal_
+```
+iex --name "cache1app@127.0.0.1" --cookie secret -S mix
+```
+
+#### _second terminal_ 
+``` 
+iex --name "cache2app@127.0.0.1" --cookie secret -S mix
+```
+
+If your run Node.list() on any iex terminal it should return the name of the other node 
+ - on the first terminal
+``` 
+iex(cache1app@127.0.0.1)1> Node.list()
+[:"cache2app@127.0.0.1"] 
+```
+
+ - on the second terminal
+``` 
+iex(cache2app@127.0.0.1)1> Node.list()
+[:"cache1app@127.0.0.1"] 
+```
+
 
 ## Acknowledgments:
 
