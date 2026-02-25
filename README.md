@@ -84,7 +84,7 @@ Manual connection (in Terminal 2)
 Node.connect(:"cache1app@127.0.0.1")
 ```
 
-## Automatic node clustering using Libcluster
+### Automatic node clustering using Libcluster
 Libcluster is a library that provides a mechanism for automatically forming clusters of Erlang nodes, with either static or dynamic node membership. 
 It provides a pluggable "strategy" system, with a variety of strategies provided out of the box.
 
