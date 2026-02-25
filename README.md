@@ -69,12 +69,12 @@ You may connect your applications' nodes manually(e.g. for testing during develo
 ### Manual connection (For test purposes.)
 Run multiple instances of your project in separate bash terminals. 
 
-#### Terminal 1
+#### _first terminal_
 ```
 iex --name "cache1app@127.0.0.1" --cookie secret -S mix
 ```
 
-#### Terminal 2 
+#### _second terminal_ 
 ``` 
 iex --name "cache2app@127.0.0.1" --cookie secret -S mix
 ```
